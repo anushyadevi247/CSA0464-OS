@@ -1,0 +1,37 @@
+#include <stdio.h>
+int main() {
+    int n, i, j, bt[10], p[10], wt[10], tat[10], temp;
+    scanf("%d", &n);
+    for(i = 0; i < n; i++)
+        scanf("%d%d", &bt[i], &p[i]);
+    for(i = 0; i < n - 1; i++)
+        for(j = i + 1; j < n; j++)
+            if(p[i] > p[j]) {
+                temp = p[i]; p[i] = p[j]; p[j] = temp;
+                temp = bt[i]; bt[i] = bt[j]; bt[j] = temp;
+            }
+    wt[0] = 0;
+    for(i = 1; i < n; i++)
+        wt[i] = wt[i - 1] + bt[i - 1];
+    for(i = 0; i < n; i++) {
+        tat[i] = wt[i] + bt[i];
+        printf("P%d\tWT=%d\tTAT=%d\n", i + 1, wt[i], tat[i]);
+    }
+    return 0;
+}
+
+INPUT
+4
+5 2
+3 1
+8 4
+6 3
+
+OUTPUT
+P1  WT=0   TAT=3
+P2  WT=3   TAT=8
+P3  WT=8   TAT=14
+P4  WT=14  TAT=22
+
+
+
