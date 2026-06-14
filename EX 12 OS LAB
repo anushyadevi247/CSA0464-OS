@@ -1,0 +1,26 @@
+#include <stdio.h>
+int main()
+{
+    int i;
+    for(i = 1; i <= 5; i++)
+    {
+        printf("Philosopher %d is Thinking\n", i);
+        printf("Philosopher %d is Eating\n", i);
+    }
+    return 0;
+}
+
+INPUT
+No Input
+
+OUTPUT
+Philosopher 1 is Thinking
+Philosopher 1 is Eating
+Philosopher 2 is Thinking
+Philosopher 2 is Eating
+Philosopher 3 is Thinking
+Philosopher 3 is Eating
+Philosopher 4 is Thinking
+Philosopher 4 is Eating
+Philosopher 5 is Thinking
+Philosopher 5 is Eating
