@@ -1,0 +1,33 @@
+#include <stdio.h>
+int main()
+{
+    int i, n;
+    char user[20];
+    printf("Enter User Name: ");
+    scanf("%s", user);
+    printf("Enter Number of Files: ");
+    scanf("%d", &n);
+    char file[10][20];
+    for(i = 0; i < n; i++)
+    {
+        printf("Enter File %d: ", i + 1);
+        scanf("%s", file[i]);
+    }
+    printf("\nUser Directory: %s\n", user);
+    for(i = 0; i < n; i++)
+        printf("%s\n", file[i]);
+    return 0;
+}
+
+INPUT 
+Ram
+3
+data.txt
+report.txt
+result.txt
+
+OUTPUT
+User Directory: Ram
+data.txt
+report.txt
+result.txt
