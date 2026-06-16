@@ -1,0 +1,70 @@
+#include <stdio.h>
+int main()
+{
+    int mutex = 1, full = 0, empty = 3, x = 0;
+    int choice;
+    while(1)
+    {
+        printf("\n1. Produce\n2. Consume\n3. Exit\n");
+        scanf("%d", &choice);
+        switch(choice)
+        {
+            case 1:
+                if((mutex == 1) && (empty != 0))
+                {
+                    mutex = 0;
+                    full++;
+                    empty--;
+                    x++;
+                    printf("Produced Item %d", x);
+                    mutex = 1;
+                }
+                else
+                    printf("Buffer Full");
+                break;
+            case 2:
+                if((mutex == 1) && (full != 0))
+                {
+                    mutex = 0;
+                    printf("Consumed Item %d", x);
+                    full--;
+                    empty++;
+                    x--;
+                    mutex = 1;
+                }
+                else
+                    printf("Buffer Empty");
+                break;
+            case 3:
+                return 0;
+        }
+    }
+}
+
+
+INPUT
+1
+1
+2
+3
+
+
+OUTPUT
+1. Produce
+2. Consume
+3. Exit
+Produced Item 1
+
+1. Produce
+2. Consume
+3. Exit
+Produced Item 2
+
+1. Produce
+2. Consume
+3. Exit
+Consumed Item 2
+
+1. Produce
+2. Consume
+3. Exit
