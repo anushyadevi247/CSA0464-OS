@@ -1,0 +1,47 @@
+#include <stdio.h>
+int main()
+{
+    int records[100];
+    int n, i, recno;
+    printf("Enter number of records: ");
+    scanf("%d", &n);
+    printf("Enter the records:\n");
+    for(i = 0; i < n; i++)
+    {
+        scanf("%d", &records[i]);
+    }
+    printf("\nStored Records:\n");
+    for(i = 0; i < n; i++)
+    {
+        printf("%d ", records[i]);
+    }
+    printf("\n\nEnter record number to access (1-%d): ", n);
+    scanf("%d", &recno);
+    if(recno < 1 || recno > n)
+    {
+        printf("Invalid Record Number\n");
+        return 0;
+    }
+    printf("\nRecords accessed sequentially:\n");
+    for(i = 0; i < recno; i++)
+    {
+        printf("%d ", records[i]);
+    }
+    printf("\n\nRequested Record = %d\n", records[recno - 1]);
+    return 0;
+}
+
+
+INPUT
+Enter number of records: 5
+Enter the records:
+101 102 103 104 105
+Enter record number to access (1-5): 4
+
+
+OUTPUT
+Stored Records:
+101 102 103 104 100
+Records accessed sequentially:
+101 102 103 104
+Requested Record = 104
