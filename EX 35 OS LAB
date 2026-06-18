@@ -1,0 +1,53 @@
+#include <stdio.h>
+int main()
+{
+    int indexBlock[100];
+    int n, i, blockNo;
+    printf("Enter the number of file blocks: ");
+    scanf("%d", &n);
+    printf("Enter the block numbers:\n");
+    for(i = 0; i < n; i++)
+    {
+        scanf("%d", &indexBlock[i]);
+    }
+    printf("\nIndex Block Table\n");
+    printf("Index\tFile Block\n");
+    for(i = 0; i < n; i++)
+    {
+        printf("%d\t%d\n", i + 1, indexBlock[i]);
+    }
+    printf("\nEnter the file block to access (1-%d): ", n);
+    scanf("%d", &blockNo);
+    if(blockNo < 1 || blockNo > n)
+    {
+        printf("Invalid Block Number\n");
+        return 0;
+    }
+    printf("\nFile Block %d is stored at Physical Block %d\n",
+           blockNo, indexBlock[blockNo - 1]);
+    return 0;
+}
+
+
+
+INPUT
+Enter the number of file blocks: 5
+Enter the block numbers:
+120
+145
+210
+178
+300
+Enter the file block to access (1-5): 3
+
+
+
+OUTPUT
+Index Block Table
+Index   File Block
+1       120
+2       145
+3       210
+4       178
+5       300
+File Block 3 is stored at Physical Block 210
