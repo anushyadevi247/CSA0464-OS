@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+int main()
+{
+    int fd;
+    char buffer[50];
+    fd = open("sample.txt", O_CREAT | O_RDWR, 0644);
+    write(fd, "Hello UNIX System Calls", 23);
+    close(fd);
+    fd = open("sample.txt", O_RDONLY);
+    read(fd, buffer, 23);
+    buffer[23] = '\0';
+    printf("File Content: %s\n", buffer);
+    close(fd);
+    return 0;
+}
+
+
+INPUT
+No Input
+
+OUTPUT
+File Content: Hello UNIX System Calls
