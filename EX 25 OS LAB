@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <dirent.h>
+int main()
+{
+    int fd;
+    struct stat fileStat;
+    DIR *dir;
+    struct dirent *entry;
+    fd = open("sample.txt", O_CREAT | O_RDWR, 0644);
+    printf("File Descriptor Flags: %d\n", fcntl(fd, F_GETFL));
+    lseek(fd, 0, SEEK_SET);
+    stat("sample.txt", &fileStat);
+    printf("File Size: %ld bytes\n", fileStat.st_size);
+    dir = opendir(".");
+    printf("\nDirectory Contents:\n");
+    while((entry = readdir(dir)) != NULL)
+    {
+        printf("%s\n", entry->d_name);
+    }
+    closedir(dir);
+    close(fd);
+    return 0;
+}
+
+
+INPUT
+No Input
+
+OUTPUT
+File Descriptor Flags: 32770
+File Size: 0 bytes
+Directory Contents:
+.
+..
+sample.txt
