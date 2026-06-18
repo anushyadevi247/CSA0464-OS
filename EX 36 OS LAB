@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct Node
+{
+    int blockNo;
+    struct Node *next;
+};
+int main()
+{
+    struct Node *head = NULL, *temp, *newNode;
+    int n, i, block;
+    printf("Enter the number of blocks in the file: ");
+    scanf("%d", &n);
+    printf("Enter the block numbers:\n");
+    for(i = 0; i < n; i++)
+    {
+        scanf("%d", &block);
+        newNode = (struct Node *)malloc(sizeof(struct Node));
+        newNode->blockNo = block;
+        newNode->next = NULL;
+        if(head == NULL)
+        {
+            head = newNode;
+            temp = head;
+        }
+        else
+        {
+            temp->next = newNode;
+            temp = newNode;
+        }
+    }
+    printf("\nLinked Allocation Table\n");
+    printf("Block\tNext Block\n");
+    temp = head;
+    while(temp != NULL)
+    {
+        if(temp->next != NULL)
+            printf("%d\t%d\n", temp->blockNo,
+                   temp->next->blockNo);
+        else
+            printf("%d\tNULL\n", temp->blockNo);
+        temp = temp->next;
+    }
+    printf("\nStart Block : %d\n", head->blockNo);
+    temp = head;
+    while(temp->next != NULL)
+        temp = temp->next;
+    printf("End Block   : %d\n", temp->blockNo);
+    printf("\nFile Traversal:\n");
+    temp = head;
+    while(temp != NULL)
+    {
+        printf("%d", temp->blockNo);
+        if(temp->next != NULL)
+            printf(" -> ");
+        temp = temp->next;
+    }
+    printf(" -> NULL\n");
+    return 0;
+}
+
+
+INPUT
+Enter the number of blocks in the file: 5
+Enter the block numbers:
+12
+35
+8
+50
+27
+
+
+
+OUTPUT
+Linked Allocation Table
+Block   Next Block
+12      35
+35      8
+8       50
+50      27
+27      NULL
+Start Block : 12
+End Block   : 27
+File Traversal:
+12 -> 35 -> 8 -> 50 -> 27 -> NULL
