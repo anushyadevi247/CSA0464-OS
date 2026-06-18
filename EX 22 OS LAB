@@ -1,0 +1,66 @@
+#include <stdio.h>
+int main()
+{
+    int block[10], process[10];
+    int i, j, nb, np, best;
+    printf("Enter number of blocks: ");
+    scanf("%d", &nb);
+    printf("Enter block sizes:\n");
+    for(i = 0; i < nb; i++)
+        scanf("%d", &block[i]);
+    printf("Enter number of processes: ");
+    scanf("%d", &np);
+    printf("Enter process sizes:\n");
+    for(i = 0; i < np; i++)
+        scanf("%d", &process[i]);
+    printf("\nProcess No\tProcess Size\tBlock No\n");
+    for(i = 0; i < np; i++)
+    {
+        best = -1;
+        for(j = 0; j < nb; j++)
+        {
+            if(block[j] >= process[i])
+            {
+                if(best == -1 || block[j] < block[best])
+                    best = j;
+            }
+        }
+        if(best != -1)
+        {
+            printf("%d\t\t%d\t\t%d\n",
+                   i + 1, process[i], best + 1);
+
+            block[best] -= process[i];
+        }
+        else
+        {
+            printf("%d\t\t%d\t\tNot Allocated\n",
+                   i + 1, process[i]);
+        }
+    }
+    return 0;
+}
+
+
+INPUT
+Enter number of blocks: 5
+Enter block sizes:
+100
+500
+200
+300
+600
+Enter number of processes: 4
+Enter process sizes:
+212
+417
+112
+426
+
+
+OUTPUT
+Process No    Process Size    Block No
+1             212             4
+2             417             2
+3             112             3
+4             426             5
