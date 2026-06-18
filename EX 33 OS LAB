@@ -1,0 +1,103 @@
+#include <stdio.h>
+int main()
+{
+    int pages[50], frames[10];
+    int n, f, i, j, k, pos, faults = 0;
+    int flag, farthest, found;
+    printf("Enter number of pages: ");
+    scanf("%d", &n);
+    printf("Enter page reference string: ");
+    for(i = 0; i < n; i++)
+        scanf("%d", &pages[i]);
+    printf("Enter number of frames: ");
+    scanf("%d", &f);
+    for(i = 0; i < f; i++)
+        frames[i] = -1;
+    for(i = 0; i < n; i++)
+    {
+        flag = 0;
+        for(j = 0; j < f; j++)
+        {
+            if(frames[j] == pages[i])
+            {
+                flag = 1;
+                break;
+            }
+        }
+        if(flag == 0)
+        {
+            faults++;
+            for(j = 0; j < f; j++)
+            {
+                if(frames[j] == -1)
+                {
+                    frames[j] = pages[i];
+                    flag = 1;
+                    break;
+                }
+            }
+            if(flag == 0)
+            {
+                farthest = i + 1;
+                pos = -1;
+                for(j = 0; j < f; j++)
+                {
+                    found = 0;
+                    for(k = i + 1; k < n; k++)
+                    {
+                        if(frames[j] == pages[k])
+                        {
+                            if(k > farthest)
+                            {
+                                farthest = k;
+                                pos = j;
+                            }
+                            found = 1;
+                            break;
+                        }
+                    }
+                    if(found == 0)
+                    {
+                        pos = j;
+                        break;
+                    }
+                }
+
+                frames[pos] = pages[i];
+            }
+        }
+        printf("\nFrames: ");
+        for(j = 0; j < f; j++)
+        {
+            if(frames[j] != -1)
+                printf("%d ", frames[j]);
+            else
+                printf("- ");
+        }
+    }
+    printf("\n\nTotal Page Faults = %d\n", faults);
+    return 0;
+}
+
+
+INPUT
+Enter number of pages: 12
+Enter page reference string:
+1 2 3 4 1 2 5 1 2 3 4 5
+Enter number of frames: 3
+
+
+OUTPUT
+Frames: 1 - -
+Frames: 1 2 -
+Frames: 1 2 3
+Frames: 1 2 4
+Frames: 1 2 4
+Frames: 1 2 4
+Frames: 1 2 5
+Frames: 1 2 5
+Frames: 1 2 5
+Frames: 3 2 5
+Frames: 4 2 5
+Frames: 4 2 5
+Total PageFaults = 7
